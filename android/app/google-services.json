@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "178040712129",
+    "project_id": "edu1-aec45",
+    "storage_bucket": "edu1-aec45.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178040712129:android:8e7f7d65556f1aec7b5d40",
+        "android_client_info": {
+          "package_name": "com.example.edum_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4rBUOsWeztLW5E93ZN6DGNggKirPFf7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

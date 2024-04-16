@@ -1,8 +1,9 @@
 import 'package:edum_1/common_pages/alumni_page.dart';
 import 'package:edum_1/common_pages/student_page.dart';
 import 'package:edum_1/event_newpost.dart';
+import 'package:edum_1/new_post.dart';
 import 'package:edum_1/notification.dart';
-import 'package:edum_1/event_page.dart';
+import 'package:edum_1/common_pages/event_page.dart';
 import 'package:flutter/material.dart';
 
 class EventDashboard extends StatefulWidget {
@@ -18,8 +19,8 @@ class _EventDashboardState extends State<EventDashboard> {
   static List<Widget> _widgetOptions = <Widget>[
     StudentPage(),
     AlumniPage(),
-    EventNewPost(),
-    EventPage(),
+    EventNewPostPage(),
+    // EventPage(),
     NotificationPage()
   ];
   @override

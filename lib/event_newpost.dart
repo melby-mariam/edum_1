@@ -4,14 +4,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 
-class EventNewPost extends StatefulWidget {
-  const EventNewPost({Key? key}) : super(key: key);
+class EventNewPost22 extends StatefulWidget {
+  const EventNewPost22({Key? key}) : super(key: key);
 
   @override
-  State<EventNewPost> createState() => _EventNewPostState();
+  State<EventNewPost22> createState() => _EventNewPostState22();
 }
 
-class _EventNewPostState extends State<EventNewPost> {
+class _EventNewPostState22 extends State<EventNewPost22> {
   final _formKey = GlobalKey<FormState>();
   String _eventTitle = '';
   String _eventDate = '';
@@ -214,10 +214,4 @@ class _EventNewPostState extends State<EventNewPost> {
       });
     }
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: EventNewPost(),
-  ));
 }
