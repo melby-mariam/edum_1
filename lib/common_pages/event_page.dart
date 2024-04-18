@@ -50,6 +50,7 @@ class _eventPageState extends State<eventPage> {
               String dpURL = data['dpURL'];
               // Display as a list title
               return EventPostCard(
+                communityName:'MuLearn',
                 date: date,
                 venue: venue,
                 moderatorId: moderatorId,

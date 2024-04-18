@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class EventPostCard extends StatefulWidget {
   final String postId;
   final List<String> likes;
+  final String communityName;
   final String venue;
   final String moderatorId;
   final String date;
@@ -23,6 +24,7 @@ class EventPostCard extends StatefulWidget {
     required this.postId,
     required this.likes,
     required this.date,
+    required this.communityName,
   });
 
   @override
