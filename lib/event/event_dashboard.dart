@@ -14,7 +14,7 @@ class _EventDashboardState extends State<EventDashboard> {
     int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    EventPage(),
+    eventPage(),
     EventNewPostPage(),
     NotificationPage()
   ];

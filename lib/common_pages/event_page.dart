@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:edum_1/event/event_postcard.dart';
 import 'package:edum_1/services/firestore.dart';
 import 'package:flutter/material.dart';
 
-class AlumniPage extends StatefulWidget {
-  const AlumniPage({super.key});
+class eventPage extends StatefulWidget {
+  const eventPage({super.key});
   @override
-  State<AlumniPage> createState() => _AlumniPageState();
+  State<eventPage> createState() => _eventPageState();
 }
 
-class _AlumniPageState extends State<AlumniPage> {
+class _eventPageState extends State<eventPage> {
   @override
   void initState() {
     // TODO: implement initState
@@ -46,27 +47,15 @@ class _AlumniPageState extends State<AlumniPage> {
               // Get note from each doc
               Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
-              String type = data['type'];
-              String alumniId = data['alumniId'];
-              String alumniName = data['alumniName'];
-              String alumniDesignation = data['alumniDesignation'];
-              String caption = data['caption'];
-              String description = data['description'];
-              String? imgURL = data['imageURL'];
-              String? dpURL = data['dpURL'];
 
               // Display as a list title
-              return AlumniPostCard(
-                type: type,
-                alumnId: alumniId,
-                alumniName: alumniName,
-                alumniDesignation: alumniDesignation,
-                caption: caption,
-                description: description,
-                imageURL: imgURL ?? '',
-                dpURL: dpURL ?? '',
-                postId: document.id,
-                likes: List<String>.from(data['likes'] ?? []),
+              return EventPostCard(
+                location: 'Ooty',
+              time: '12 pm',
+              date: '21/21/2121',
+              photo: 'https://png.pngtree.com/thumb_back/fh260/background/20230611/pngtree-two-cute-egg-cupids-sitting-in-sunlight-next-to-each-other-image_2914931.jpg',
+              details: 'Details of the post is here',
+              title: 'This is Event title',
               );
             },
           );
