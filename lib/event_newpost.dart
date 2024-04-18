@@ -1,3 +1,4 @@
+import 'package:edum_1/services/firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -12,6 +13,8 @@ class EventNewPost22 extends StatefulWidget {
 }
 
 class _EventNewPostState22 extends State<EventNewPost22> {
+  FirestoreService _firestoreService = FirestoreService();
+
   final _formKey = GlobalKey<FormState>();
   String _eventTitle = '';
   String _eventDate = '';
@@ -19,7 +22,12 @@ class _EventNewPostState22 extends State<EventNewPost22> {
   String? _otherDetails;
   File? _imageFile;
   bool _submitted = false;
-  TextEditingController _dateController = TextEditingController(); // Controller for event date
+  TextEditingController _dateController = TextEditingController();
+  TextEditingController _eventTitleController = TextEditingController();
+  TextEditingController _eventVenueController = TextEditingController();
+  TextEditingController _otherDetailsController = TextEditingController();
+
+   // Controller for event date
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +54,13 @@ class _EventNewPostState22 extends State<EventNewPost22> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildTextField('Event Title', (value) => _eventTitle = value!),
+                _buildTextField('Event Title', (value) => _eventTitle = value!,_eventTitleController),
                 SizedBox(height: 16.0),
                 _buildTextFieldWithCalendarIcon('Event Date', (value) => _eventDate = value!),
                 SizedBox(height: 16.0),
-                _buildTextField('Event Venue', (value) => _eventVenue = value!),
+                _buildTextField('Event Venue', (value) => _eventVenue = value!,_eventVenueController),
                 SizedBox(height: 16.0),
-                _buildTextField('Other Details', (value) => _otherDetails = value),
+                _buildTextField('Other Details', (value) => _otherDetails = value,_otherDetailsController),
                 SizedBox(height: 16.0),
                 Text(
                   'Photo',
@@ -82,18 +90,21 @@ class _EventNewPostState22 extends State<EventNewPost22> {
       _submitted = true;
     });
 
+    _firestoreService.addEventPosts(
+      EventTitle: _eventTitleController.text, 
+      moderatorId: 'mod123', 
+      moderatorName: 'modmemms', 
+      Date: _dateController.text, 
+      Venue: _eventVenueController.text, 
+      otherDetails: _otherDetailsController.text
+      );
+
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      // Perform post submission logic here
-      print('Event Title: $_eventTitle');
-      print('Event Date: $_eventDate');
-      print('Event Venue: $_eventVenue');
-      print('Other Details: $_otherDetails');
-      print('Image File: ${_imageFile?.path}');
     }
   }
 
-  Widget _buildTextField(String label, Function(String?) onSaved) {
+  Widget _buildTextField(String label, Function(String?) onSaved, TextEditingController t_controller) {
     bool showError = _submitted && (label == 'Event Title' ? _eventTitle.isEmpty : (label == 'Event Date' ? _eventDate.isEmpty : label == 'Event Venue' ? _eventVenue.isEmpty : false));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,6 +114,7 @@ class _EventNewPostState22 extends State<EventNewPost22> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         TextFormField(
+          controller: t_controller,
           decoration: InputDecoration(
             hintText: 'Enter $label',
             border: OutlineInputBorder(),

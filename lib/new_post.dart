@@ -244,7 +244,7 @@
 //   }
 // }
 
-
+import 'package:edum_1/services/firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -260,6 +260,9 @@ class EventNewPostPage extends StatefulWidget {
 }
 
 class _EventNewPostPageState extends State<EventNewPostPage> {
+
+  FirestoreService _firestoreService = FirestoreService();
+
   final _formKey = GlobalKey<FormState>();
   String _eventTitle = '';
   String _eventDate = '';
@@ -267,8 +270,12 @@ class _EventNewPostPageState extends State<EventNewPostPage> {
   String? _otherDetails;
   File? _imageFile;
   bool _submitted = false;
-  TextEditingController _dateController = TextEditingController(); // Controller for event date
-  final FirestoreService _firestoreService = FirestoreService();
+  TextEditingController _dateController = TextEditingController();
+  TextEditingController _eventTitleController = TextEditingController();
+  TextEditingController _eventVenueController = TextEditingController();
+  TextEditingController _otherDetailsController = TextEditingController();
+   // Controller for event date
+  // final FirestoreService _firestoreService = FirestoreService();
   bool _isLoading = false;
 
   @override
@@ -303,14 +310,15 @@ class _EventNewPostPageState extends State<EventNewPostPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildTextField('Event Title', (value) => _eventTitle = value!),
+                      _buildTextField('Event Title', (value) => _eventTitle = value!,_eventTitleController),
                       SizedBox(height: 16.0),
                       _buildTextFieldWithCalendarIcon('Event Date', (value) => _eventDate = value!),
                       SizedBox(height: 16.0),
-                      _buildTextField('Event Venue', (value) => _eventVenue = value!),
+                      _buildTextField('Event Venue', (value) => _eventVenue = value!,_eventVenueController),
                       SizedBox(height: 16.0),
-                      _buildTextField('Other Details', (value) => _otherDetails = value),
+                      _buildTextField('Other Details', (value) => _otherDetails = value,_otherDetailsController),
                       SizedBox(height: 16.0),
+
                       Text(
                         'Photo',
                         style: TextStyle(fontWeight: FontWeight.bold),
@@ -339,6 +347,16 @@ class _EventNewPostPageState extends State<EventNewPostPage> {
       _submitted = true;
     });
 
+    _firestoreService.addEventPosts(
+      EventTitle: _eventTitleController.text, 
+      moderatorId: 'mod123', 
+      moderatorName: 'modmemms', 
+      Date: _dateController.text, 
+      Venue: _eventVenueController.text, 
+      otherDetails: _otherDetailsController.text
+      );
+
+
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
@@ -347,18 +365,27 @@ class _EventNewPostPageState extends State<EventNewPostPage> {
       });
 
       final imageURL = await _uploadImage();
-      await _firestoreService.addEventPosts(
-        type: 'Event',
-        alumniId: 'eventId',
-        alumniName: 'Moderator',
-        alumniDesignation: 'ModeratorDescription',
-        caption: _eventTitle,
-        description: _otherDetails ?? '',
-        imageURL: imageURL,
-        dpURL: 'https://png.pngtree.com/thumb_back/fh260/background/20230611/pngtree-two-cute-egg-cupids-sitting-in-sunlight-next-to-each-other-image_2914931.jpg',
+      _firestoreService.addEventPosts(
+      EventTitle: _eventTitleController.text, 
+      moderatorId: 'mod123', 
+      moderatorName: 'modmemms', 
+      Date: _dateController.text, 
+      Venue: _eventVenueController.text, 
+      otherDetails: _otherDetailsController.text,
+      imageURL: imageURL,
+      dpURL: 'https://png.pngtree.com/thumb_back/fh260/background/20230611/pngtree-two-cute-egg-cupids-sitting-in-sunlight-next-to-each-other-image_2914931.jpg',
+      );
+      // await _firestoreService.addEventPosts(
+      //   type: 'Event',
+      //   alumniId: 'eventId',
+      //   alumniName: 'Moderator',
+      //   alumniDesignation: 'ModeratorDescription',
+      //   caption: _eventTitle,
+      //   description: _otherDetails ?? '',
+        
         // eventDate: _eventDate,
         // eventVenue: _eventVenue,
-      );
+      
 
       setState(() {
         _isLoading = false;
@@ -406,7 +433,7 @@ class _EventNewPostPageState extends State<EventNewPostPage> {
     }
   }
 
-  Widget _buildTextField(String label, Function(String?) onSaved) {
+  Widget _buildTextField(String label, Function(String?) onSaved, TextEditingController t_controller) {
     bool showError = _submitted && (label == 'Event Title' ? _eventTitle.isEmpty : (label == 'Event Date' ? _eventDate.isEmpty : label == 'Event Venue' ? _eventVenue.isEmpty : false));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -416,6 +443,7 @@ class _EventNewPostPageState extends State<EventNewPostPage> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         TextFormField(
+          controller: t_controller,
           decoration: InputDecoration(
             hintText: 'Enter $label',
             border: OutlineInputBorder(),
