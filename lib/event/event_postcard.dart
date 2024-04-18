@@ -232,23 +232,9 @@ class _PostCardState extends State<EventPostCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      'Event  ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(width: 8),
-                    Text(
-                      ':',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(width: 8),
-                    Text(
-                      widget.eventTitle,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                Text(
+                  'Event : ${widget.eventTitle}',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 4),
                 Row(
