@@ -40,19 +40,25 @@ class _eventPageState extends State<eventPage> {
               // Get note from each doc
               Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
-              print('Data For the Event Posts ::: \n$data');
-
+              String venue = data['venue'];
+              String moderatorId = data['moderatorId'];
+              String date = data['date'];
+              String moderatorName = data['moderatorName'];
+              String otherDetails = data['otherDetails'];
+              String eventTitle = data['eventTitle'];
+              String imageURL = data['imageURL'];
+              String dpURL = data['dpURL'];
               // Display as a list title
               return EventPostCard(
-                date: '21/21/2121',
-                venue: 'Ooty',
-                moderatorId: '',
-                moderatorName: '',
-                otherDetails: 'Details of the post is here',
-                dpURL: 'https://png.pngtree.com/thumb_back/fh260/background/20230611/pngtree-two-cute-egg-cupids-sitting-in-sunlight-next-to-each-other-image_2914931.jpg',
-                postId: '',
-                imageURL: 'https://png.pngtree.com/thumb_back/fh260/background/20230611/pngtree-two-cute-egg-cupids-sitting-in-sunlight-next-to-each-other-image_2914931.jpg',
-                eventTitle: 'This is Event title',
+                date: date,
+                venue: venue,
+                moderatorId: moderatorId,
+                moderatorName: moderatorName,
+                otherDetails: otherDetails,
+                dpURL: dpURL,
+                postId: document.id,
+                imageURL: imageURL,
+                eventTitle: eventTitle,
                 likes: [],
               );
             },
