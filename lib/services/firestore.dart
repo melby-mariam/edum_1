@@ -50,9 +50,9 @@ class FirestoreService {
 
   // To get the data for event posts
   Stream<QuerySnapshot> getEventPostsStream() {
-    final alumniPostsStream =
+    final eventPostsStream =
         event_posts.orderBy('timestamp', descending: true).snapshots();
-    return alumniPostsStream;
+    return eventPostsStream;
   }
 
   // Update/Edit post data

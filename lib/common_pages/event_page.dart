@@ -10,13 +10,6 @@ class eventPage extends StatefulWidget {
 }
 
 class _eventPageState extends State<eventPage> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    setState(() {});
-  }
-
   final FirestoreService firestoreService = FirestoreService();
 
   Widget build(BuildContext context) {
@@ -36,26 +29,31 @@ class _eventPageState extends State<eventPage> {
             return Center(child: Text('No data available'));
           }
 
-          List alumniPostList = snapshot.data!.docs;
+          List eventPostList = snapshot.data!.docs;
           return ListView.builder(
-            itemCount: alumniPostList.length,
+            itemCount: eventPostList.length,
             itemBuilder: (context, index) {
               // Get each individual doc
-              DocumentSnapshot document = alumniPostList[index];
+              DocumentSnapshot document = eventPostList[index];
               // String docID = document.id;
 
               // Get note from each doc
               Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
+              print('Data For the Event Posts ::: \n$data');
 
               // Display as a list title
               return EventPostCard(
-                location: 'Ooty',
-              time: '12 pm',
-              date: '21/21/2121',
-              photo: 'https://png.pngtree.com/thumb_back/fh260/background/20230611/pngtree-two-cute-egg-cupids-sitting-in-sunlight-next-to-each-other-image_2914931.jpg',
-              details: 'Details of the post is here',
-              title: 'This is Event title',
+                date: '21/21/2121',
+                venue: 'Ooty',
+                moderatorId: '',
+                moderatorName: '',
+                otherDetails: 'Details of the post is here',
+                dpURL: 'https://png.pngtree.com/thumb_back/fh260/background/20230611/pngtree-two-cute-egg-cupids-sitting-in-sunlight-next-to-each-other-image_2914931.jpg',
+                postId: '',
+                imageURL: 'https://png.pngtree.com/thumb_back/fh260/background/20230611/pngtree-two-cute-egg-cupids-sitting-in-sunlight-next-to-each-other-image_2914931.jpg',
+                eventTitle: 'This is Event title',
+                likes: [],
               );
             },
           );

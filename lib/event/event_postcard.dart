@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 
 class EventPostCard extends StatefulWidget {
-  final String location;
-  final String time;
+  final String postId;
+  final List<String> likes;
+  final String venue;
+  final String moderatorId;
   final String date;
-  final String photo;
-  final String details;
-  final String title;
+  final String moderatorName;
+  final String otherDetails;
+  final String eventTitle;
+  final String imageURL;
+  final String dpURL;
 
   EventPostCard({
-    required this.location,
-    required this.time,
+    required this.venue,
+    required this.moderatorId,
+    required this.moderatorName,
+    required this.otherDetails,
+    required this.eventTitle,
+    required this.imageURL,
+    required this.dpURL,
+    required this.postId,
+    required this.likes,
     required this.date,
-    required this.photo,
-    required this.details,
-    required this.title,
   });
 
   @override
@@ -41,76 +49,63 @@ class _PostCardState extends State<EventPostCard> {
                   children: [
                     CircleAvatar(
                       radius: 20,
-                      backgroundColor: Colors.grey, // Placeholder color
-                      child: Text(
-                        widget.title[0].toUpperCase(),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
+                      backgroundImage: NetworkImage(widget.dpURL),
                     ),
                     SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.title,
+                          widget.eventTitle,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 4),
                         Text(
-                          '${widget.date}, ${widget.time}, ${widget.location}',
+                          '${widget.date}',
                           style: TextStyle(fontSize: 12, color: Colors.grey),
                         ),
                       ],
                     ),
                   ],
                 ),
-                PopupMenuButton(
-                  itemBuilder: (_) => [
-                    PopupMenuItem(
-                      child: Text('Option 1'),
-                      value: 'option1',
-                    ),
-                    PopupMenuItem(
-                      child: Text('Option 2'),
-                      value: 'option2',
-                    ),
-                    PopupMenuItem(
-                      child: Text('Option 3'),
-                      value: 'option3',
-                    ),
-                  ],
-                ),
+                // PopupMenuButton(
+                //   itemBuilder: (_) => [
+                //     PopupMenuItem(
+                //       child: Text('Option 1'),
+                //       value: 'option1',
+                //     ),
+                //     PopupMenuItem(
+                //       child: Text('Option 2'),
+                //       value: 'option2',
+                //     ),
+                //     PopupMenuItem(
+                //       child: Text('Option 3'),
+                //       value: 'option3',
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),
           Padding(
             padding: EdgeInsets.all(10.0),
             child: Text(
-              widget.details,
+              widget.otherDetails,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
             padding: EdgeInsets.all(10.0),
-            child: Container(
-              height: 200,
-              color: Colors.grey[300],
-              child: Center(
-                child: Icon(
-                  Icons.image,
-                  size: 50,
-                  color: Colors.grey[600],
-                ),
-              ),
-            ),
+            child: widget.imageURL!.isNotEmpty
+                ? Image.network(
+                    widget.imageURL,
+                    fit: BoxFit.cover,
+                  )
+                : Container(),
           ),
           Padding(
             padding: EdgeInsets.all(10.0),
-            child: Text(widget.details),
+            child: Text(widget.otherDetails),
           ),
           ButtonBar(
             alignment: MainAxisAlignment.spaceEvenly,
@@ -154,4 +149,3 @@ class _PostCardState extends State<EventPostCard> {
     );
   }
 }
-
