@@ -1,7 +1,5 @@
-import 'package:edum_1/common_pages/alumni_page.dart';
-import 'package:edum_1/common_pages/student_page.dart';
-import 'package:edum_1/new_post.dart';
-import 'package:edum_1/notification.dart';
+import 'package:edum_1/event/event_newpost.dart';
+import 'package:edum_1/event/notification.dart';
 import 'package:edum_1/common_pages/event_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +14,8 @@ class _EventDashboardState extends State<EventDashboard> {
     int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    StudentPage(),
-    AlumniPage(),
-    EventNewPostPage(),
     EventPage(),
+    EventNewPostPage(),
     NotificationPage()
   ];
   @override
@@ -43,20 +39,12 @@ class _EventDashboardState extends State<EventDashboard> {
         unselectedItemColor: Colors.grey,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Alumni',
+            icon: Icon(Icons.calendar_today),
+            label: 'Events',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
             label: 'Post',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Events',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),

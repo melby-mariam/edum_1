@@ -1,16 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:edum_1/event_postcard.dart';
 import 'package:edum_1/services/firestore.dart';
 import 'package:flutter/material.dart';
 
-class EventPage extends StatefulWidget {
-  const EventPage({super.key});
-
+class AlumniPage extends StatefulWidget {
+  const AlumniPage({super.key});
   @override
-  State<EventPage> createState() => _EventPageState();
+  State<AlumniPage> createState() => _AlumniPageState();
 }
 
-class _EventPageState extends State<EventPage> {
+class _AlumniPageState extends State<AlumniPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {});
+  }
+
   final FirestoreService firestoreService = FirestoreService();
 
   Widget build(BuildContext context) {
@@ -30,53 +35,43 @@ class _EventPageState extends State<EventPage> {
             return Center(child: Text('No data available'));
           }
 
-          List EventPostList = snapshot.data!.docs;
+          List alumniPostList = snapshot.data!.docs;
           return ListView.builder(
-            itemCount: EventPostList.length,
+            itemCount: alumniPostList.length,
             itemBuilder: (context, index) {
               // Get each individual doc
-              DocumentSnapshot document = EventPostList[index];
+              DocumentSnapshot document = alumniPostList[index];
               // String docID = document.id;
 
               // Get note from each doc
               Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
-              String EventTitle = data['eventTitle'];
-              String moderatorId = data['moderatorId']; 
-              String moderatorName = data['moderatorName'];
-              String Date = data['date']; 
-              String Venue = data['venue'];
-              String otherDetails = data['otherDetails'];
-              String? imageURL = data['imageURL'];
+              String type = data['type'];
+              String alumniId = data['alumniId'];
+              String alumniName = data['alumniName'];
+              String alumniDesignation = data['alumniDesignation'];
+              String caption = data['caption'];
+              String description = data['description'];
+              String? imgURL = data['imageURL'];
               String? dpURL = data['dpURL'];
 
-              print(EventTitle);
-              print(moderatorName);
-              print(moderatorId);
-              print(Date);
-              print(Venue);
-              print(otherDetails);
-              print(imageURL);
-              print(dpURL);
-
-      
-
               // Display as a list title
-              return EventPostCard(
-  EventTitle: EventTitle,
-  moderatorId: moderatorId,
-  moderatorName: moderatorName,
-  Date: Date,
-  Venue: Venue,
-  otherDetails: otherDetails,
-  imageURL: imageURL ?? '',
-  dpURL: '',
-  postId: document.id,
-  likes: List<String>.from(data['likes'] ?? []),
-);
+              return AlumniPostCard(
+                type: type,
+                alumnId: alumniId,
+                alumniName: alumniName,
+                alumniDesignation: alumniDesignation,
+                caption: caption,
+                description: description,
+                imageURL: imgURL ?? '',
+                dpURL: dpURL ?? '',
+                postId: document.id,
+                likes: List<String>.from(data['likes'] ?? []),
+              );
             },
           );
         },
       ),
-    );}
+    );
+  }
 }
