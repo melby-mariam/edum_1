@@ -233,47 +233,21 @@ class _PostCardState extends State<EventPostCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Event : ${widget.eventTitle}',
+                  'Event     :    ${widget.eventTitle}',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 4),
-                Row(
-                  children: [
-                    Text(
-                      'Date    ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(width: 8),
-                    Text(
-                      ':',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(width: 8),
-                    Text(
-                      widget.date,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                 Text(
+                  'Date      :    ${widget.date}',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 4),
-                Row(
-                  children: [
-                    Text(
-                      'Venue ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(width: 8),
-                    Text(
-                      ':',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(width: 8),
-                    Text(
-                      widget.venue,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                 Text(
+                  'Venue   :     ${widget.venue}',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
+                SizedBox(height: 4),
+                
               ],
             ),
           ),
@@ -290,6 +264,36 @@ class _PostCardState extends State<EventPostCard> {
             padding: EdgeInsets.all(10.0),
             child: Text(widget.otherDetails),
           ),
+                        
+              Row(
+              mainAxisAlignment: MainAxisAlignment.start, // Align to the left
+              children: [
+                SizedBox(
+                  height: 40, // Set the desired height
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.green,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0), // Reduce the curve size
+                    ),
+                    // Add horizontal padding
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Enroll",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+           
           ButtonBar(
             alignment: MainAxisAlignment.spaceEvenly,
             children: [
