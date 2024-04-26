@@ -1,4 +1,5 @@
 import 'package:edum_1/event/event_newpost.dart';
+import 'package:edum_1/event/event_posted.dart';
 import 'package:edum_1/event/notification.dart';
 import 'package:edum_1/common_pages/event_page.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class _EventDashboardState extends State<EventDashboard> {
   static List<Widget> _widgetOptions = <Widget>[
     eventPage(),
     EventNewPostPage(),
+    PostedEvent(),
     NotificationPage()
   ];
   @override
@@ -45,6 +47,9 @@ class _EventDashboardState extends State<EventDashboard> {
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
             label: 'Post',
+          ),BottomNavigationBarItem(
+            icon: Icon(Icons.alarm),
+            label: 'Event Posted',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
