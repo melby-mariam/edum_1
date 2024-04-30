@@ -17,7 +17,7 @@ class _EventDashboardState extends State<EventDashboard> {
   static List<Widget> _widgetOptions = <Widget>[
     eventPage(),
     EventNewPostPage(),
-    // PostedEvent(),
+    PostedEvents(),
     NotificationPage()
   ];
   @override
