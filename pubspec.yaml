@@ -49,6 +49,7 @@ dependencies:
   share_plus: ^8.0.3
   firebase_auth: ^4.19.2
   image_gallery_saver: ^2.0.3
+  mailer: ^6.1.0
 
 dev_dependencies:
   flutter_test:

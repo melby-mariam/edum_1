@@ -3,6 +3,7 @@ import 'package:edum_1/event/event_posted.dart';
 import 'package:edum_1/event/notification.dart';
 import 'package:edum_1/common_pages/event_page.dart';
 import 'package:flutter/material.dart';
+import 'package:edum_1/event/event_mail.dart';
 
 class EventDashboard extends StatefulWidget {
   const EventDashboard({super.key});
